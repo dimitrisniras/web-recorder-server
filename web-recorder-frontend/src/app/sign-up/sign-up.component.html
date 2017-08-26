@@ -1,0 +1,64 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="/">
+                <span> <img src="./assets/icon64.png" width="30" height="30" class="d-inline-block align-top" alt=""> </span>Web Recorder
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li> <a class="nav-link" routerLink="/learn-more" style="color:white;">Learn More </a> </li>
+                <li> <a class="nav-link" routerLink="/documentation" style="color:white;">Documentation </a> </li>
+                <li> <a class="nav-link" routerLink="/sign-in" style="color:white;">Sign in</a> </li>
+                <li class="active"> <a class="nav-link" routerLink="/sign-up" style="color:white;">Create Free Account</a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <form class="form-signup" name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+        <app-alert></app-alert>
+        <h1 class="form-signup-heading"><b>Sign Up for Web Recorder</b></h1>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="firstName" class="sr-only">First Name</label>
+            <input type="text" name="firstName" class="form-control" placeholder="First Name" [(ngModel)]="model.firstName" #firstName="ngModel" required autofocus>
+            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="lastName" class="sr-only">Last Name</label>
+            <input type="text" name="lastName" class="form-control" placeholder="Last Name" [(ngModel)]="model.lastName" #lastName="ngModel" required>
+            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="email" class="sr-only">Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder="Email address" [(ngModel)]="model.email" #email="ngModel" required>
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="model.password" #password="ngModel" required>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button><br>
+        </div>
+        <h5>Already have an account? <a class="nav-link" routerLink="/sign-in">Sign In</a></h5>
+    </form>
+</div>
+
+<div class="footer">
+    <p style="font-size: 110%">Web Recorder - Automated Website Testing and Monitoring - &copy; 2017 Created By <a href="https://www.linkedin.com/in/nirasdimitris/" target="_blank" style="color:#888585;">Dimitriοs Niras</a></p>
+    <p style="font-size: 90%">
+        Icons made by
+        <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" target="_blank" style="color:#888585;">
+            Pixel Buddha
+        </a> from
+        <a href="http://www.flaticon.com" title="Flaticon" target="_blank" style="color:#888585;">
+            www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" style="color:#888585;">
+            CC 3.0 BY
+        </a>
+    </p>
+</div>

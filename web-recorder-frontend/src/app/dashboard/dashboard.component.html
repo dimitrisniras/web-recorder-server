@@ -1,0 +1,99 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/dashboard">
+                <span> <img src="./assets/icon64.png" width="30" height="30" class="d-inline-block align-top" alt=""> </span>Web Recorder
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">Help&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/documentation" target="_blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Documentation</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a routerLink="/learn-more" target="_blank"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;Learn More</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">{{currentUser.firstName}} {{currentUser.lastName}}&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/dashboard/account-settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Account Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a (click)="logout()" style="cursor: pointer;"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1><b>Dashboard</b></h1>
+    <p>Below is a full listing of your test suites.</p>
+    <h3 *ngIf="stats !== undefined"><span class="label label-primary">{{stats.suites}} Suites</span> <span class="label label-info">{{stats.tests}} Tests</span> <span class="label label-success">{{stats.passing}} Passing</span> <span class="label label-danger">{{stats.failing}} Failing</span>        <span class="label label-default">{{stats.not_tested}} Not Tested</span>
+    </h3>
+    <h3 *ngIf="stats !== undefined"><span class="label label-primary">{{stats.last_week_passed}}/{{stats.week_runs}} Passed Last Week</span> <span class="label label-primary">{{stats.all_time_passed}}/{{stats.all_time_runs}} All Time Passed</span></h3>
+    <hr>
+
+    <table class="table">
+        <thead style="background-color: #DCDCDC;">
+            <tr>
+                <th class="max-width">SUITE NAME</th>
+                <th class="no-wrap text-center">SCHEDULE</th>
+                <th class="no-wrap text-center">TESTS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let suite of suites">
+                <td>
+                    <h4><a class="nav-link" (click)="onClickListener(suite.name)" style="cursor: pointer;"><b>{{suite.name}}</b></a></h4>
+                    <h4><span class="label label-success"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true "></span> {{suite.passed}} Passing</span> <span class="label label-danger"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true "></span>                        {{suite.failed}} Failing</span> <span class="label label-default"><span class="glyphicon glyphicon-info-sign" aria-hidden="true "></span> {{suite.not_tested}} Not tested</span>
+                    </h4>
+                </td>
+                <td>
+                    <h4 align="center" *ngIf="suite.schedule == 'none'">No Schedule</h4>
+                    <h4 align="center" *ngIf="suite.schedule == 'daily'">Daily</h4>
+                </td>
+                <td>
+                    <h4 align="center">{{suite.testsNumber}}</h4>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form-group" [ngClass]="{ 'has-error': message }">
+                        <input class="form-control" type="text" [(ngModel)]="newSuiteName" placeholder="Suite Name" style="width: 70%">
+                        <div *ngIf="message" class="help-block">{{message}}</div>
+                    </div>
+                </td>
+                <td></td>
+                <td align="center">
+                    <button class="btn btn-primary" (click)="createNewSuite()">Create Suite</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br><br><br><br><br><br><br>
+<div class="footer">
+    <p style="font-size: 110%">Web Recorder - Automated Website Testing and Monitoring - &copy; 2017 Created By <a href="https://www.linkedin.com/in/nirasdimitris/" target="_blank" style="color:#888585;">Dimitriοs Niras</a></p>
+    <p style="font-size: 90%">
+        Icons made by
+        <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" target="_blank" style="color:#888585;">
+            Pixel Buddha
+        </a> from
+        <a href="http://www.flaticon.com" title="Flaticon" target="_blank" style="color:#888585;">
+            www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" style="color:#888585;">
+            CC 3.0 BY
+        </a>
+    </p>
+</div>

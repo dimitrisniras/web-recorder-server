@@ -1,0 +1,437 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/dashboard">
+                <span> <img src="./assets/icon64.png" width="30" height="30" class="d-inline-block align-top" alt=""> </span>Web Recorder
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">Help&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/documentation" target="_blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Documentation</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a routerLink="/learn-more" target="_blank"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;Learn More</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">{{currentUser.firstName}} {{currentUser.lastName}}&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/dashboard/account-settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Account Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <ol class="breadcrumb" style="background-color: white;">
+        <li class="breadcrumb-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;<a routerLink="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/dashboard/suites/' + suiteName]">{{suiteName}}</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/dashboard/suites/' + suiteName + '/tests/' + testName]">{{testName}}</a></li>
+        <li class="breadcrumb-item active">Edit Steps</li>
+    </ol>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6" align="left">
+            <h1><b>{{testName}}</b></h1>
+        </div>
+        <div class="col-md-6" align="right" style="margin-top: 22px;">
+            <button class="btn btn-danger" (click)="onCancel()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Cancel</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="onSave()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Save Changes</button>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Edit Steps</h2>
+            <p>Test steps allow you to perform actions within the browser. They are executed sequentially.</p>
+            <button class="btn btn-primary" (click)="addPrecondition()"><span class="glyphicon glyphicon-open" aria-hidden="true"></span> Add Precondition</button><br><br>
+        </div>
+        <div class="col-md-4">
+            <br><br>
+            <input *ngIf="search === 'id'" type="text" class="form-control" placeholder="Search steps..." [(ngModel)]="filter.id">
+            <input *ngIf="search === 'description'" type="text" class="form-control" placeholder="Search steps..." [(ngModel)]="filter.description">
+            <p>
+                Search based on:
+                <input type="radio" value="id" [(ngModel)]="search"> Identifier &nbsp;
+                <input type="radio" value="description" [(ngModel)]="search"> Description &nbsp;
+            </p>
+        </div>
+    </div>
+
+    <h3 *ngIf="preconditions != undefined && preconditions.length != 0">Preconditions</h3>
+    <div class="panel panel-default" *ngFor="let pre of preconditions; let i=index">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6" align="left" *ngIf="pre.status == 'PENDING'">
+                    <h3 class="panel-title" style="color: grey;">#{{i+1}}&nbsp;</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="pre.status == 'PASSED'">
+                    <h3 class="panel-title" style="color: green;">#{{i+1}}&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Passing</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="pre.status == 'FAILED'">
+                    <h3 class="panel-title" style="color: red;">#{{i+1}}&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Failing</h3>
+                </div>
+                <div class="col-md-6" align="right">
+                    <a (click)="addPreconditionAbove(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>Add Above</a>&nbsp;
+                    <a (click)="addPreconditionBelow(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>Add Below</a>&nbsp;
+                    <a (click)="deletePrecondition(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Suite Name</label>
+                    <select class="selectpicker form-control" [(ngModel)]="pre.suiteName" (change)="findTestPreconditionNames(pre.suiteName, i);">
+                        <option *ngFor="let suite of suites" [ngValue]="suite">{{suite}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Test Name</label>
+                    <select class="selectpicker form-control" [(ngModel)]="pre.testName">
+                        <option *ngFor="let test of pre.tests" [ngValue]="test">{{test}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+    <h3>Steps</h3>
+    <div class="panel panel-default" *ngFor="let t of testObject | searchSteps:filter; let i=index">
+        <div class="panel-heading" *ngIf="t.type == 'get' && i == 0">
+            <div class="row">
+                <div class="col-md-6" align="left">
+                    <h3 class="panel-title">Start URL</h3>
+                </div>
+                <div class="col-md-6" align="right">
+                    <a (click)="addBelow(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>Add Below</a>&nbsp;
+                    <a (click)="deleteStep(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading" *ngIf="t.type == 'get' && i != 0">
+            <div class="row">
+                <div class="col-md-6" align="left" *ngIf="t.status == 'PENDING'">
+                    <h3 class="panel-title" style="color: grey;">#{{i}}&nbsp;</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="t.status == 'OK'">
+                    <h3 class="panel-title" style="color: green;">#{{i}}&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Passing</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="t.status == 'FAIL'">
+                    <h3 class="panel-title" style="color: red;">#{{i}}&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Failing</h3>
+                </div>
+                <div class="col-md-6" align="right">
+                    <a (click)="addAbove(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>Add Above</a>&nbsp;
+                    <a (click)="addBelow(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>Add Below</a>&nbsp;
+                    <a (click)="deleteStep(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading" *ngIf="t.type != 'get'">
+            <div class="row">
+                <div class="col-md-6" align="left" *ngIf="t.status == 'PENDING'">
+                    <h3 class="panel-title" style="color: grey;">#{{i}}&nbsp;</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="t.status == 'OK'">
+                    <h3 class="panel-title" style="color: green;">#{{i}}&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Passing</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="t.status == 'FAIL'">
+                    <h3 class="panel-title" style="color: red;">#{{i}}&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Failing</h3>
+                </div>
+                <div class="col-md-6" align="right">
+                    <a (click)="addAbove(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>Add Above</a>&nbsp;
+                    <a (click)="addBelow(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>Add Below</a>&nbsp;
+                    <a (click)="deleteStep(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body" *ngIf="t.type == 'get' && i != 0">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.type" #type="ngModel">
+                            <optgroup label="Operations">
+                                <option value="click">Click</option>
+                                <option value="db-click">Double Click</option>
+                                <option value="right-click">Right Click</option>
+                                <option value="change">Assign</option>
+                                <option value="select">Select</option>
+                                <option value="keypress">Keypress</option>
+                                <option value="mouse-over">Mouse Over</option>
+                                <option value="pause">Pause (time in ms)</option>
+                            </optgroup>
+                            <optgroup label="Navigation">
+                                <option value="get">Go to URL</option>
+                                <option value="refresh">Refresh</option>
+                            </optgroup>
+                            <optgroup label="Assertions">
+                                <option value="present">Element is present</option>
+                                <option value="not-present">Element is not present</option>
+                                <option value="visible">Element is visible</option>
+                                <option value="not-visible">Element is not visible</option>
+                                <option value="text-equal">Element text equals</option>
+                                <option value="text-not-equal">Element text does not equal</option>
+                                <option value="text-contain">Element text contains</option>
+                                <option value="text-not-contain">Element text does not contain</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" [(ngModel)]="t.URL">
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Add description..." [(ngModel)]="t.description" style="background-color: #edd3d3;">
+        </div>
+        <div class="panel-body" *ngIf="t.type == 'get' && i == 0">
+            <input type="text" class="form-control" [(ngModel)]="t.URL">
+        </div>
+        <div class="panel-body" *ngIf="t.type != 'get' && t.type != 'refresh' && t.type != 'pause'">
+            <input type="text" class="form-control" placeholder="Identifier" [(ngModel)]="t.id"><br>
+            <input type="text" class="form-control" placeholder="URL" [(ngModel)]="t.url"><br>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.type" #type="ngModel">
+                            <optgroup label="Operations">
+                                <option value="click">Click</option>
+                                <option value="db-click">Double Click</option>
+                                <option value="right-click">Right Click</option>
+                                <option value="change">Assign</option>
+                                <option value="select">Select</option>
+                                <option value="keypress">Keypress</option>
+                                <option value="mouse-over">Mouse Over</option>
+                                <option value="pause">Pause (time in ms)</option>
+                            </optgroup>
+                            <optgroup label="Navigation">
+                                <option value="get">Go to URL</option>
+                                <option value="refresh">Refresh</option>
+                            </optgroup>
+                            <optgroup label="Assertions">
+                                <option value="present">Element is present</option>
+                                <option value="not-present">Element is not present</option>
+                                <option value="visible">Element is visible</option>
+                                <option value="not-visible">Element is not visible</option>
+                                <option value="text-equal">Element text equals</option>
+                                <option value="text-not-equal">Element text does not equal</option>
+                                <option value="text-contain">Element text contains</option>
+                                <option value="text-not-contain">Element text does not contain</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.identifier" #identifier="ngModel">
+                            <optgroup label="Find by: "> 
+                                <option value="id">ID</option>
+                                <option value="name">Name</option>
+                                <option value="linkText">Text</option>
+                                <option value="className">Class</option>
+                                <option value="xpath">XPath</option>
+                                <option value="css">CSS</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-7" *ngIf="t.type == 'select' || t.type == 'assert' || t.type == 'text-equal' || t.type == 'text-not-equal' || t.type == 'text-contain' || t.type == 'text-not-contain'">
+                    <input type="text" class="form-control" placeholder="Input" [(ngModel)]="t.input">
+                </div>
+                <div class="col-md-2" *ngIf="t.type == 'change'">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.inputType" #inputType="ngModel">
+                            <optgroup label="Input type: ">
+                                <option value="freetext">Free text</option>
+                                <option value="regex">Regular expression</option>
+                                <option value="int_range">Integer range</option>
+                                <option value="num_range">Float range</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5" *ngIf="t.type == 'change' && t.inputType == 'freetext'">
+                    <input type="text" class="form-control" placeholder="Input" [(ngModel)]="t.input">
+                </div>
+                <div class="col-md-5" *ngIf="t.type == 'change' && t.inputType == 'regex'">
+                    <input type="text" class="form-control" placeholder="Regular Expression" [(ngModel)]="t.regex">
+                </div>
+                <div class="col-md-2" *ngIf="t.type == 'change' && (t.inputType == 'int_range' || t.inputType == 'num_range')">
+                    <input type="text" class="form-control" placeholder="From" [(ngModel)]="t.from">
+                </div>
+                <div class="col-md-2" *ngIf="t.type == 'change' && (t.inputType == 'int_range' || t.inputType == 'num_range')">
+                    <input type="text" class="form-control" placeholder="To" [(ngModel)]="t.to">
+                </div>
+                <div class="col-md-7" *ngIf="t.type == 'keypress'">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.input" #input="ngModel">
+                            <option value="backspace">Backspace</option>
+                            <option value="enter">Enter</option>
+                            <option value="escape">Escape</option>
+                            <option value="tab">Tab</option>
+                            <option value="up">Arrow Up</option>
+                            <option value="down">Arrow Down</option>
+                            <option value="left">Arrow Left</option>
+                            <option value="right">Arrow Right</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a (click)="applyToAll(i)" style="cursor: pointer; color: #888585;">Apply to all</a>
+                <div *ngIf="applyToAllMessage && applyToAllIndex == i && applyToAllStatus == 'success'" style="color: green;" class="help-block">
+                    {{applyToAllMessage}}
+                </div>
+                <div *ngIf="applyToAllMessage && applyToAllIndex == i && applyToAllStatus == 'fail'" style="color: red;" class="help-block">
+                    {{applyToAllMessage}}
+                </div>
+            </div><br>
+            <input type="text" class="form-control" placeholder="Add description..." [(ngModel)]="t.description" style="background-color: #edd3d3;">
+        </div>
+        <div class="panel-body" *ngIf="t.type == 'refresh'">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.type" #type="ngModel">
+                            <optgroup label="Operations">
+                                <option value="click">Click</option>
+                                <option value="db-click">Double Click</option>
+                                <option value="right-click">Right Click</option>
+                                <option value="change">Assign</option>
+                                <option value="select">Select</option>
+                                <option value="keypress">Keypress</option>
+                                <option value="mouse-over">Mouse Over</option>
+                                <option value="pause">Pause (time in ms)</option>
+                            </optgroup>
+                            <optgroup label="Navigation">
+                                <option value="get">Go to URL</option>
+                                <option value="refresh">Refresh</option>
+                            </optgroup>
+                            <optgroup label="Assertions">
+                                <option value="present">Element is present</option>
+                                <option value="not-present">Element is not present</option>
+                                <option value="visible">Element is visible</option>
+                                <option value="not-visible">Element is not visible</option>
+                                <option value="text-equal">Element text equals</option>
+                                <option value="text-not-equal">Element text does not equal</option>
+                                <option value="text-contain">Element text contains</option>
+                                <option value="text-not-contain">Element text does not contain</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Add description..." [(ngModel)]="t.description" style="background-color: #edd3d3;">
+        </div>
+        <div class="panel-body" *ngIf="t.type == 'pause'">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="selectpicker form-control" [(ngModel)]="t.type" #type="ngModel">
+                            <optgroup label="Operations">
+                                <option value="click">Click</option>
+                                <option value="db-click">Double Click</option>
+                                <option value="right-click">Right Click</option>
+                                <option value="change">Assign</option>
+                                <option value="select">Select</option>
+                                <option value="keypress">Keypress</option>
+                                <option value="mouse-over">Mouse Over</option>
+                                <option value="pause">Pause (time in ms)</option>
+                            </optgroup>
+                            <optgroup label="Navigation">
+                                <option value="get">Go to URL</option>
+                                <option value="refresh">Refresh</option>
+                            </optgroup>
+                            <optgroup label="Assertions">
+                                <option value="present">Element is present</option>
+                                <option value="not-present">Element is not present</option>
+                                <option value="visible">Element is visible</option>
+                                <option value="not-visible">Element is not visible</option>
+                                <option value="text-equal">Element text equals</option>
+                                <option value="text-not-equal">Element text does not equal</option>
+                                <option value="text-contain">Element text contains</option>
+                                <option value="text-not-contain">Element text does not contain</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" placeholder="Input" [(ngModel)]="t.input">
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Add description..." [(ngModel)]="t.description" style="background-color: #edd3d3;">
+        </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="addStep()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Step</button>&nbsp;
+
+    <h3 *ngIf="postconditions !== undefined && postconditions.length !== 0"><br>Postconditions</h3>
+    <div class="panel panel-default" *ngFor="let post of postconditions; let i=index">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-6" align="left" *ngIf="post.status == 'PENDING'">
+                    <h3 class="panel-title" style="color: grey;">#{{i+1}}&nbsp;</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="post.status == 'PASSED'">
+                    <h3 class="panel-title" style="color: green;">#{{i+1}}&nbsp;<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Passing</h3>
+                </div>
+                <div class="col-md-6" align="left" *ngIf="post.status == 'FAILED'">
+                    <h3 class="panel-title" style="color: red;">#{{i+1}}&nbsp;<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Failing</h3>
+                </div>
+                <div class="col-md-6" align="right">
+                    <a (click)="addPostconditionAbove(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>Add Above</a>&nbsp;
+                    <a (click)="addPostconditionBelow(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>Add Below</a>&nbsp;
+                    <a (click)="deletePostcondition(i)" style="cursor: pointer; color: grey;"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Suite Name</label>
+                    <select class="selectpicker form-control" [(ngModel)]="post.suiteName" (change)="findTestPostconditionNames(post.suiteName, i);">
+                        <option *ngFor="let suite of suites" [ngValue]="suite">{{suite}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Test Name</label>
+                    <select class="selectpicker form-control" [(ngModel)]="post.testName">
+                        <option *ngFor="let test of post.tests" [ngValue]="test">{{test}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="addPostcondition()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Add Postcondition</button>
+</div>
+
+<br><br><br><br><br><br><br>
+<div class="footer">
+    <p style="font-size: 110%">Web Recorder - Automated Website Testing and Monitoring - &copy; 2017 Created By <a href="https://www.linkedin.com/in/nirasdimitris/" target="_blank" style="color:#888585;">Dimitriοs Niras</a></p>
+    <p style="font-size: 90%">
+        Icons made by
+        <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" target="_blank" style="color:#888585;">
+            Pixel Buddha
+        </a> from
+        <a href="http://www.flaticon.com" title="Flaticon" target="_blank" style="color:#888585;">
+            www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" style="color:#888585;">
+            CC 3.0 BY
+        </a>
+    </p>
+</div>

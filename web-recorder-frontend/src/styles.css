@@ -1,0 +1,31 @@
+.carousel-inner img {
+    width: 100%;
+    margin: auto;
+    min-height: 400px;
+    max-height: 800px;
+}
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    text-align: justify;
+}
+
+.footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #202019;
+    color: #888585;
+    text-align: center;
+}

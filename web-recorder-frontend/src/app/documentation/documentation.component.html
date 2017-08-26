@@ -1,0 +1,2027 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="/">
+                <span> <img src="./assets/icon64.png" width="30" height="30" class="d-inline-block align-top" alt=""> </span>Web Recorder
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li> <a class="nav-link" routerLink="/learn-more" style="color:white;">Learn More </a> </li>
+                <li> <a class="nav-link" routerLink="/documentation" style="color:white;">Documentation </a> </li>
+                <li> <a class="nav-link" routerLink="/sign-in" style="color:white;">Sign in</a> </li>
+                <li class="active"> <a class="nav-link" routerLink="/sign-up" style="color:white;">Create Free Account</a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="myCarousel">
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img style="background-color:#696969;" alt="Head image">
+            <div class="carousel-caption">
+                <h1>{{headline}}</h1>
+                <h4>Learn everything you need to know about Web Recorder.</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-3">
+            &nbsp;
+            <h4><b>Browser Testing</b></h4>
+            <ul style="list-style-type:disc; font-size: 110%">
+                <li><a (click)="changePage('Getting Started')" style="cursor: pointer;">Getting Started</a></li>
+                <li><a (click)="changePage('Chrome Extension')" style="cursor: pointer;">Chrome Extension</a></li>
+                <li><a (click)="changePage('Test Editor')" style="cursor: pointer;">Test Editor</a></li>
+                <li><a (click)="changePage('Modularizing Tests Steps')" style="cursor: pointer;">Modularizing Tests Steps</a></li>
+                <li><a (click)="changePage('Scheduling Suite Runs')" style="cursor: pointer;">Scheduling Suite Runs</a></li>
+            </ul><br>
+
+            <h4><b>API</b></h4>
+            <ul style="list-style-type:disc; font-size: 110%">
+                <li><a (click)="changePage('Overview')" style="cursor: pointer;">Overview</a></li>
+                <li><a (click)="changePage('Suites')" style="cursor: pointer;">Suites</a></li>
+                <li><a (click)="changePage('Tests')" style="cursor: pointer;">Tests</a></li>
+                <li><a (click)="changePage('User')" style="cursor: pointer;">User</a></li>
+            </ul><br>
+
+            <h4><b>Resources</b></h4>
+            <ul style="list-style-type:disc; font-size: 110%">
+                <li><a (click)="changePage('Security')" style="cursor: pointer;">Security</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div *ngIf="pageId === 'Getting Started'">
+                <h2><b>Getting Started with Web Recorder</b></h2>
+                <p style="font-size: 112%">Web Recorder is an automated website testing and monitoring service that checks for problems with your website or application. It carries out operations in a browser, the same way a user would, to ensure that everything is working properly.</p><br>
+                <p style="font-size: 112%">In order to start recording your own test cases, firstly you should <a routerLink="/sign-up">sign up</a> for a free Web Recorder account. For test creation you can either install our <a (click)="changePage('Chrome Extension')" style="cursor: pointer;">Chrome extension</a>                    or you can use our hosted <a (click)="changePage('Test Editor')" style="cursor: pointer;">test editor</a>. Tests are run from our cloud service. You can set tests to run continuously on a daily <a (click)="changePage('Scheduling Suite Runs')"
+                        style="cursor: pointer;">schedule</a> and control various other aspects of your testing.</p><br>
+                <p style="font-size: 112%">You can learn more about Web Recorder and its capabilities in the next sections</p>
+            </div>
+            <div *ngIf="pageId === 'Chrome Extension'">
+                <h2><b>Chrome Extension</b></h2>
+                <p style="font-size: 112%">Web Recorder includes a free Chrome extension for recording actions in your browser and turning them into a reproducible test case. This extension is available in the <a href="https://github.com/AuthEceSoftEng/web-recorder-chrome-plugin"
+                        target="_blank">GitHub</a>. After installing the extension, a Web Recorder icon will appear in your toolbar. Clicking this icon will show you the Web Recorder recording tool. The first time that you will access the extension, you will
+                    need to log in to your Web Recorder account. Then a recording button will present to you.</p><br>
+                <p align="center"><img src="./assets/extension.png"></p><br>
+                <p style="font-size: 112%">The extension works by recording the actions you perform in the browser, such as clicking, filling forms, select values etc. so that those actions can be formed into a test and the same sequence can be run again from the Web Recorder cloud
+                    service. Once you click "Start Recording" the extension will begin recording your actions.</p><br>
+                <p style="font-size: 112%">In addition to recording actions, the extension can also record "Assertions". Assertions are confirmations that something is true, for example, that an element exists on the page. They are helpful to verify that your test is working as
+                    it should. During the recording process, you can switch from recording actions to recording assertions by clicking the Web Recorder toolbar icon and the "Make Assertions" button.</p><br>
+                <p align="center"><img src="./assets/extension_recording.png"></p><br>
+                <p style="font-size: 112%">When recording assertions, the extension will attempt to disable any actions associated with elements so that you can assert things like links and buttons without triggering their associated actions. You'll see the extension displays a
+                    crosshair cursor and highlights elements as you hover over them so you can tell what you're asserting. These assertions can be adjusted in the test editor after recording is complete. You can change between recording actions and assertions
+                    at any time during the recording process. There is also a small link to cancel the recording and start over.</p><br>
+                <p style="font-size: 112%">Once you're done recording, click the "Done" button. You'll be presented with a form for saving the test. You will need to name the test and select which of your suites to store it in.</p><br>
+                <p align="center"><img src="./assets/extension_saving.png"></p><br>
+                <p style="font-size: 112%">Once you save the recording, you'll be presented with a link to the new test in the hosted Web Recorder application. Once the test case upload to Web Recorder application, you can edit the test steps.</p><br>
+                <p align="center"><img src="./assets/extension_upload.png"></p>
+            </div>
+            <div *ngIf="pageId === 'Test Editor'">
+                <h2><b>Test Steps</b></h2>
+                <p style="font-size: 112%">Web Recorder's test editor provides you with the ability to manage all the steps in your test. It is accessible by clicking the "Edit Steps" button when viewing your test. Tests are often created with our <a (click)="changePage('Chrome Extension')"
+                        style="cursor: pointer;">Chrome extension</a> first and then been edited. However, tests can also be built from scratch. The test editor displays each test step as a block with options for adding and removing steps.</p><br>
+                <p align="center"><img src="./assets/edit_steps.png" width="850" height="550"></p><br>
+                <p style="font-size: 112%">The dropdown menu on the bottom, left contains the action associated with the step. This dictates whether the step is performing an operation such as clicking an element, making an assertion, and so on. There is a wide range of actions
+                    available.
+                </p><br>
+                <p align="center"><img src="./assets/edit_steps_actions.png" width="850" height="630"></p><br>
+                <p style="font-size: 112%">When a step involves interacting with an element on the page, for instance clicking a button, our system targets that element using its id, name, text, class, CSS or XPath. The selector for the target element is entered into the "Identifier"
+                    input at the top of the step. Also next to actions dropdown menu there is another one that gives you the ability to choose what type of targeting you want.</p><br>
+                <p style="font-size: 112%">In the left corner there is a link "Apply to all", that implements any change that have been made in the step's identifier in all tests that have the same element and URL. Down from it there is an input that you can type any description
+                    about the specific step.</p><br>
+                <p align="center"><img src="./assets/edit_steps_target.png" width="850" height="542"></p><br>
+                <p style="font-size: 112%">Certain actions will present additional fields for the step. For instance, an "Assign" step will present a field for inputing the value to assign to the element you are targeting. Also a drowdown menu will apear with values "Free Text",
+                    "Regular Expression", "Integer Range" and "Float range". These options can modify the input value with a text that user enters, a regular expression or an integer or float in a scepcific range. A "Keypress" step will allow you to choose
+                    from a number of keystrokes like "Enter", "Backspace" and "Escape". Each step action has it's own set of fields related to the action it's performing.</p><br>
+                <p align="center"><img src="./assets/edit_steps_input.png" width="850"></p><br>
+                <p style="font-size: 112%">Furthermore there is a search input that you can type the step that you want to find. The keywords are based on the identity of the step and it's description.</p><br>
+                <p align="center"><img src="./assets/edit_steps_search.png" width="850"></p><br><br>
+
+                <h2><b>Step Actions</b></h2>
+
+                <h3><b>Operations</b></h3>
+                <p style="font-size: 112%">Operations include the standard actions that a typical user will carry out on a webpage.</p><br>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Click</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Execute a mouse left click on a specific element.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Double Click</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Execute a mouse double click on a specific element.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Right Click</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Execute a mouse right click on a specific element.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Assign</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Assign a value into an input field, such as an <code>&lt;input type="text"&gt;</code> element.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Select</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Assign a value into an input field, such as an <code>&lt;select&gt;</code> element.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Keypress</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Perform a keypress action, such as pressing "Enter" on an element.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Mouse Over</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Move the mouse cursor over an element, triggering "mouseover" events.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Pause</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Pause for a specific amount of time. The time is specific in milliseconds, so a value of 1000 will pause the test for 1 second.</p>
+                    </div>
+                </div><br>
+
+                <h3><b>Navigation</b></h3>
+                <p style="font-size: 112%">Navigation actions include two single operations for navigating to a page and refreshing it.</p><br>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Go to URL</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Navigate to a specified URL in the browser.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Refresh</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">Refresh the current page in the browser.</p>
+                    </div>
+                </div>
+                <br>
+
+                <h3><b>Assertions</b></h3>
+                <p style="font-size: 112%">Assertions allow you to confirm that a certain condition is met on the page. They help to confirm that things are working as expected.</p>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element is present</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element is present in the DOM. It will fail if it is not.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element is not present</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element is not present in the DOM. It will fail if it is.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element is visible</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element is visible on the page. It will fail if the element is not visible.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element is not visible</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element is not visible on the page. It will fail if the element is visible.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element text equals</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element's text (or value) is exactly equal to the included text. It will fail if the element's text does not exactly match.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element text does not equal</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element's text (or value) is not equal to the included text. It will fail if the element's text does exactly match.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element text contains</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element's text (or value) contains the included text. It will fail if the element's text does not contain the text.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4" align="right">
+                        <p style="font-size: 108%"><b>Element text does not contain</b></p>
+                    </div>
+                    <div class="col-md-8">
+                        <p style="font-size: 108%">This test will pass if the specified element's text (or value) does not contain the included text. It will fail if the element's text does contain the text.</p>
+                    </div>
+                </div>
+                <br><br>
+
+                <h2><b>Step Targets</b></h2>
+                <p style="font-size: 112%">Web Recorder targets the elements in your test using as mentioned above several ways (id, name, class, text, CSS, XPath). If you're looking to generate a unique selector for an element outside of our recording extension, Chrome offers
+                    options when you right click on elements in the developer console:</p><br>
+                <p align="center"><img src="./assets/element_selector.png" width="850"></p>
+            </div>
+            <div *ngIf="pageId === 'Modularizing Tests Steps'">
+                <h2><b>Modularizing Tests</b></h2>
+                <p style="font-size: 112%">Web Recorder gives you the ability to include preconditions and postconditions to your tests. That means that you can execute, before (preconditons) or after (postconditions) the specified test, another test (or tests) that you had created
+                    before. This allows you to segment out certain operations and easily reuse them.</p><br>
+                <h4><b>Preconditions</b></h4><br>
+                <p align="center"><img src="./assets/preconditions.png" width="850"></p><br>
+                <h4><b>Postconditions</b></h4><br>
+                <p align="center"><img src="./assets/postconditions.png" width="850"></p>
+            </div>
+            <div *ngIf="pageId === 'Scheduling Suite Runs'">
+                <h2><b>Scheduling Suite Runs</b></h2>
+                <p style="font-size: 112%">Web Recorder gives you the ability to execute your tests in a specified suite on a daily schedule. To use this feature, go into your suite's settings and modify schedule.</p>
+                <p align="center"><img src="./assets/schedule.png" width="850"></p>
+            </div>
+            <div *ngIf="pageId === 'Overview'">
+                <h2><b>API Documentation</b></h2>
+                <p style="font-size: 112%">Web Recorder is a free and open source project. You can find the code of the server <a href="https://github.com/AuthEceSoftEng/web-recorder-server" target="_blank">here</a> and the code of the Chrome extension <a href="https://github.com/AuthEceSoftEng/web-recorder-chrome-plugin"
+                        target="_blank">here</a>. Our API allows you to access and run tests remotely. It can be used to integrate Web Recorder into your workflow.</p><br>
+                <p style="font-size: 112%">In order to access the API you have to be authorized. For that reason on API calls (except <code style="color: grey;">Authenticate</code>, <code style="color: grey;">Register</code>, <code style="color: grey;">Forgot Password</code> and
+                    <code style="color: grey;">Reset Password</code> calls) you have to use authorization headers with this format type: <code>Authorization: Bearer + &lt;user.token&gt;</code> (ex. Authorization: Bearer xxxxxxx). The user's token can
+                    be found following these steps: Open DevTools > Application > Local Storage > currentUser > token. API calls also need user's unique ID. This can be found exactly like user's token.</p>
+            </div>
+            <div *ngIf="pageId === 'Suites'">
+                <h2><b>API: Suite Resource</b></h2><br>
+
+                <h3><b>Get Suites</b></h3>
+                <p style="font-size: 108%">Fetch an array of all the suites in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suites.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Suite</b></h3>
+                <p style="font-size: 108%">Fetch a single suite.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite to fetch</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suite.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Suite Names</b></h3>
+                <p style="font-size: 108%">Fetch an array of all the suite names in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suiteNames</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suiteNames.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Suite Stats</b></h3>
+                <p style="font-size: 108%">Fetch an array of statistics of suite runs.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/stats</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite to fetch</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suiteStats.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Suite History</b></h3>
+                <p style="font-size: 108%">Fetch the history of a specific suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/history</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite to fetch</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suite_history.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Suite Specific History</b></h3>
+                <p style="font-size: 108%">Fetch a single history object of a specific suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/history/&lt;history_id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>history_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The id of the suite's history to fetch</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suite_tests_history.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Suite's Specific Test History</b></h3>
+                <p style="font-size: 108%">Fetch a single history object of a specific suite's test in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/history/&lt;history_id&gt;/&lt;test&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>history_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The id of the suite's history</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test to fetch</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_suite_test_history.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Create New Suite</b></h3>
+                <p style="font-size: 108%">Create a new suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><b>suiteName</b>: &lt;String&gt;</h4>
+                    </div>
+                </div><br>
+
+                <h3><b>Update Suite Settings</b></h3>
+                <p style="font-size: 108%">Update settings of a single suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/settings</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/updateSuiteSettings.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Update Suite History</b></h3>
+                <p style="font-size: 108%">Update history of a single suite in your account after suite execution.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/history</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <h3><b>Delete Suite</b></h3>
+                <p style="font-size: 108%">Delete a single suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <h3><b>Delete Suite History</b></h3>
+                <p style="font-size: 108%">Delete specific history of a single suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/history/&lt;history_id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>history_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The ID of the suite's history to be deleted</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <h3><b>Delete Suite's Test History</b></h3>
+                <p style="font-size: 108%">Delete specific test's history of a single suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/history/&lt;history_id&gt;/&lt;test&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>history_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The ID of the suite's history</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test's history to be deleted</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+            </div>
+            <div *ngIf="pageId === 'Tests'">
+                <h2><b>API: Test Resource</b></h2><br>
+
+                <h3><b>Get Tests</b></h3>
+                <p style="font-size: 108%">Fetch an array of all the tests in a specific suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_tests.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Test</b></h3>
+                <p style="font-size: 108%">Fetch a single test of a specific suite in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test to fetch</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_test.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Test Names</b></h3>
+                <p style="font-size: 108%">Fetch an array of all the test names in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/names</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_test_names.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Test Stats</b></h3>
+                <p style="font-size: 108%">Fetch an array of statistics of specific test runs.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/stats</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_testStats.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Get Test History</b></h3>
+                <p style="font-size: 108%">Fetch the history of a single test.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/history/&lt;history_id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>history_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The test's unique history ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_test_history.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Execute Test</b></h3>
+                <p style="font-size: 108%">Execute a single test in your account and return the result.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/result</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test to be executed</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_test_result.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Create New Test</b></h3>
+                <p style="font-size: 108%">Create a new test in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/test</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/createNewTest.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Post New Test</b></h3>
+                <p style="font-size: 108%">Post a new test in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/tests</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/postNewTest.png">
+                    </div>
+                </div><br>
+                <p style="font-size: 112%">In order to post a new test, &lt;test_obj&gt; must have a specific strict format. Below you can see this format.</p><br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Test Object</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/testObjectFormat.png">
+                        <hr>
+                        <h4><b>Type</b></h4>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>get</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Navigate to a specified URL in the browser</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>refresh</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Refresh the current page in the browser</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>click</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Execute a mouse left click on a specific element</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>db-click</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Execute a mouse double click on a specific element</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>right-click</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Execute a mouse right click on a specific element</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>mouse-over</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Move the mouse cursor over an element, triggering "mouseover" events</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>keypress</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Perform a keypress action, such as pressing "Enter" on an element</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>change</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Assign a value into an input field, such as an <code>&lt;input type="text"&gt;</code> element</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>select</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Assign a value into an input field, such as an <code>&lt;select&gt;</code> element.</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>pause</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Pause for a specific amount of time. The time is specific in milliseconds, so a value of 1000 will pause the test for 1 second.</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>present</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if element is present</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>not-present</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if element is not present</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>visible</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if element is visible</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>not-visible</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if element is not visible</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>text-equal</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if specified element's text is exactly equal to the included text</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>text-not-equal</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if specified element's text is not equal to the included text</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>text-contain</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if specified element's text contains the included text</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>text-not-contain</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Checks if specified element's text does not contain the included text</h4>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4><b>Identifier</b></h4>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Target an element using it's id</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>name</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Target an element using it's name</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>class</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Target an element using it's class</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>text</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Target an element using it's text</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>XPath</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Target an element using it's XPath</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>CSS</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Target an element using it's CSS</h4>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4><b>InputType</b></h4>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>freetext</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Assign user's text to input</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>regex</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Assign a regular expression to input</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>int_range</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Assign an integer in specific range to input</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>num_range</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Assign a float in specific range to input</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <h3><b>Duplicate Test</b></h3>
+                <p style="font-size: 108%">Create a copy of a specific test in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/&lt;suite&gt;/&lt;test&gt;/duplicate</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test to duplicate</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <h3><b>Update Test Steps Identifier</b></h3>
+                <p style="font-size: 108%">Update test step identifier and apply this change to all test steps with same identifier and URL.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/updateid</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/updateStepsID.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Update Test Steps</b></h3>
+                <p style="font-size: 108%">Update steps of a specific test in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/edit</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/updateSteps.png">
+                        <hr>
+                        <img src="./assets/preconditionsEdit.png">
+                        <hr>
+                        <img src="./assets/postconditionsEdit.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Update Test Result</b></h3>
+                <p style="font-size: 108%">Update the result of a single test after running.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/update-result</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><b>result</b>: Output from <code style="color: grey;">Execute Test</code> API call</h4>
+                    </div>
+                </div><br>
+
+                <h3><b>Update Test Settings</b></h3>
+                <p style="font-size: 108%">Update settings of a single test</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/settings</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/updateTestSettings.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Delete Test</b></h3>
+                <p style="font-size: 108%">Delete a single test in your account</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test to be deleted</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div><br>
+
+                <h3><b>Delete Test History</b></h3>
+                <p style="font-size: 108%">Delete a specific history of a single test in your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/suites/&lt;suite&gt;/tests/&lt;test&gt;/history/&lt;history_id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>suite</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the suite</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>test</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The name of the test</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>history_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>The ID of the test's history to be deleted</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="pageId === 'User'">
+                <h2><b>API: User Resource</b></h2><br>
+
+                <h3><b>Get Stats</b></h3>
+                <p style="font-size: 108%">Fetch an array of stats describing your account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>GET</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/stats</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Response</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/get_stats.png">
+                    </div>
+                </div><br>
+                <h3><b>Authenticate</b></h3>
+                <p style="font-size: 108%">Authenticate a user to access his account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}authenticate</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/authenticate.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Register</b></h3>
+                <p style="font-size: 108%">Register a new user.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}register</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/register.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Forgot Password</b></h3>
+                <p style="font-size: 108%">Send an email in case of password lost.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}forgot-password</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><b>email</b>: &lt;String&gt;</h4>
+                    </div>
+                </div><br>
+
+                <h3><b>Reset Password</b></h3>
+                <p style="font-size: 108%">Reset user's password in case of lost (after forgot password API call).</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>POST</code>&nbsp;&nbsp;{{serverURL}}reset-password/&lt;temp_id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>temp_id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>A temporary ID that produced on <code style="color: grey;">Forgot Password</code> API call and will be destroyed after password reset</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><b>password</b>: &lt;String&gt;</h4>
+                    </div>
+                </div><br>
+
+                <h3><b>Update User Information</b></h3>
+                <p style="font-size: 108%">Update user information like First Name, Last Name and email.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/updateUserInfo.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Update User Password</b></h3>
+                <p style="font-size: 108%">Update user password with a new one.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>PUT</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;/password</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Body</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="./assets/updateUserPassword.png">
+                    </div>
+                </div><br>
+
+                <h3><b>Delete User</b></h3>
+                <p style="font-size: 108%">Delete user's account.</p>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Request</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <h4><code>DELETE</code>&nbsp;&nbsp;{{serverURL}}&lt;id&gt;</h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><b>Parameters</b></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3" align="right">
+                                <h4><code>id</code></h4>
+                            </div>
+                            <div class="col-md-9">
+                                <h4>Your account unique ID</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="pageId === 'Security'">
+                <h2><b>Security</b></h2><br>
+
+                <h3><b>Accessing Data</b></h3>
+                <p style="font-size: 112%">Web Recorder uses best practices for Internet security. This helps ensure that your data is safe, secure, and available only to authorized users. Your data will be completely inaccessible to anyone else, unless you explicitly choose to
+                    share that data with the public. Web Recorder enforces secure HTTPS for our entire website. All communications with Web Recorder's API are also protected with SSL.</p><br>
+                <p style="font-size: 112%">The Chrome extension allows you to record your actions and save them in a test case. It only does this when you manually start recording a test. It’s not tracking your actions otherwise. The recording stops the second you finish (or cancel).
+                    Furthermore, the extension only sends the recorded data to our servers when you save the test. It does not send this data to our servers during the recording process.
+                </p><br>
+
+                <h3><b>Storing Data</b></h3>
+                <p style="font-size: 112%">Web Recorder allows you to store browser actions in a test and execute them from our servers. This can include logging into websites with a set of credentials. All test information is stored as plain text in our database and does not be
+                    encrypted. While we take the most precautions to secure our servers and database , if a database breach were to occur, test data would be accessible. For this reason, we insist that you never use live credentials or any type of sensitive
+                    data within a test, whether specified manually or recorded with our extension.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br><br><br><br><br><br><br><br><br>
+<div class="footer">
+    <p style="font-size: 110%">Web Recorder - Automated Website Testing and Monitoring - &copy; 2017 Created By <a href="https://www.linkedin.com/in/nirasdimitris/" target="_blank" style="color:#888585;">Dimitriοs Niras</a></p>
+    <p style="font-size: 90%">
+        Icons made by
+        <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" target="_blank" style="color:#888585;">
+            Pixel Buddha
+        </a> from
+        <a href="http://www.flaticon.com" title="Flaticon" target="_blank" style="color:#888585;">
+            www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" style="color:#888585;">
+            CC 3.0 BY
+        </a>
+    </p>
+</div>

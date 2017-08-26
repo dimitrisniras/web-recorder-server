@@ -1,0 +1,103 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/dashboard">
+                <span> <img src="./assets/icon64.png" width="30" height="30" class="d-inline-block align-top" alt=""> </span>Web Recorder
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">Help&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/documentation" target="_blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Documentation</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a routerLink="/learn-more" target="_blank"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;Learn More</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">{{currentUser.firstName}} {{currentUser.lastName}}&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/dashboard/account-settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Account Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a routerLink="/" (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <ol class="breadcrumb" style="background-color: white;">
+        <li class="breadcrumb-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;<a routerLink="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/dashboard/suites/' + oldSuiteName]">{{oldSuiteName}}</a></li>
+        <li class="breadcrumb-item active">Suite Settings</li>
+    </ol>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6" align="left">
+            <h1><b>{{oldSuiteName}}</b></h1>
+        </div>
+        <div class="col-md-6" align="right" style="margin-top: 22px;">
+            <button class="btn btn-danger" (click)="modal.open()">Delete Suite</button>&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-default" (click)="onCancel()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Cancel</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="onSave()"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>&nbsp;Save Changes</button>
+        </div>
+    </div>
+    <hr>
+
+    <h3>Suite Details</h3><br>
+    <div class="form-group" [ngClass]="{ 'has-error': message }">
+        <label>Suite Name</label>
+        <input type="text" class="form-control" [(ngModel)]="suiteName" style="width: 40%;">
+        <div *ngIf="message" class="help-block">{{message}}</div>
+    </div>
+    <hr>
+
+    <h3>Schedule</h3><br>
+    <div class="form-group" *ngIf="suite !== undefined">
+        <select class="selectpicker form-control" [(ngModel)]="suite.schedule" style="width: 40%;">
+            <option value="none">No Schedule</option>
+            <option value="daily">Daily</option>
+        </select>
+    </div>
+
+</div>
+
+<br><br><br><br><br><br><br>
+<div class="footer">
+    <p style="font-size: 110%">Web Recorder - Automated Website Testing and Monitoring - &copy; 2017 Created By <a href="https://www.linkedin.com/in/nirasdimitris/" target="_blank" style="color:#888585;">Dimitriοs Niras</a></p>
+    <p style="font-size: 90%">
+        Icons made by
+        <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" target="_blank" style="color:#888585;">
+            Pixel Buddha
+        </a> from
+        <a href="http://www.flaticon.com" title="Flaticon" target="_blank" style="color:#888585;">
+            www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" style="color:#888585;">
+            CC 3.0 BY
+        </a>
+    </p>
+</div>
+
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Delete this suite?</h4>
+    </modal-header>
+    <modal-body>
+        Are you sure you want to delete the "{{suiteName}}" suite? All tests contained in this suite (along with their results) will be permanently deleted. This operation cannot be undone.
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.dismiss()">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="deleteSuite()">Yes, delete this entire suite</button>
+    </modal-footer>
+</modal>

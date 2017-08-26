@@ -1,0 +1,155 @@
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/dashboard">
+                <span> <img src="./assets/icon64.png" width="30" height="30" class="d-inline-block align-top" alt=""> </span>Web Recorder
+            </a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">Help&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/documentation" target="_blank"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;Documentation</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a routerLink="/learn-more" target="_blank"><span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp;Learn More</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color:white;">{{currentUser.firstName}} {{currentUser.lastName}}&nbsp;<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/dashboard/account-settings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;Account Settings</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a routerLink="/" (click)="logout()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <ol class="breadcrumb" style="background-color: white;">
+        <li class="breadcrumb-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;<a routerLink="/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">{{suiteName}}</li>
+    </ol>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-6" align="left">
+            <h1><b>{{suiteName}}</b></h1>
+            <p>Below is a full listing of your tests in {{suiteName}} suite.</p>
+            <p *ngIf="stats !== undefined" style="font-size: 110%"><b>Latest Run - {{stats.latest_passed}}/{{stats.tests_number}}</b></p>
+            <p *ngIf="stats !== undefined" style="font-size: 110%"><b>Last Week Runs - {{stats.last_week_passed}}/{{stats.week_runs}}</b></p>
+            <p *ngIf="stats !== undefined" style="font-size: 110%"><b>All Time Runs - {{stats.all_time_passed}}/{{stats.all_time_runs}}</b></p>
+        </div>
+        <div class="col-md-6" align="right" style="margin-top: 35px;">
+            <a class="nav-link" [routerLink]="['/dashboard/suites/' + suiteName + '/suite-settings']" style="cursor: pointer;"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Settings</a>&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-primary" (click)="runSuite()"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Run Entire Suite</button>
+        </div>
+    </div>
+    <hr>
+
+    <h2>Tests</h2>
+    <table class="table">
+        <thead style="background-color: #DCDCDC;">
+            <tr>
+                <th class="max-width">TEST NAME</th>
+                <th class="no-wrap text-center">STATUS</th>
+                <th class="no-wrap text-center">TESTED</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let test of tests; let i=index">
+                <td *ngIf="running == false">
+                    <h4><a class="nav-link" (click)="onClickListener(test.testName)" style="cursor: pointer;"><b>{{test.testName}}</b></a></h4>
+                    <p>
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span><a (click)="runTest(test.testName, i)" style="cursor: pointer; color: grey;">Run Test</a>&nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span><a [routerLink]="['/dashboard/suites/' + suiteName + '/tests/' + test.testName + '/edit']" style="color: grey;">Edit Steps</a>&nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-copy" aria-hidden="true"></span><a (click)="duplicate(test.suiteName, test.testName)" style="cursor: pointer; color: grey;">Duplicate</a>&nbsp;&nbsp;
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span><a [routerLink]="['/dashboard/suites/' + suiteName + '/tests/' + test.testName + '/test-settings']" style="color: grey;">Settings</a>
+                    </p>
+                </td>
+                <td class="no-wrap text-center" *ngIf="running == false">
+                    <div *ngIf="test.status == 'NOT TESTED' || test.status == 'RUNNING...'" style="color: grey;">
+                        <h5><b>{{test.status}}</b></h5>
+                    </div>
+                    <div *ngIf="test.status == 'PASSED'" style="color: green;">
+                        <h5><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b>{{test.status}}</b></h5>
+                    </div>
+                    <div *ngIf="test.status == 'FAILED'" style="color: red;">
+                        <h5><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <b>{{test.status}}</b></h5>
+                    </div>
+                </td>
+                <td align="center" *ngIf="running == false">
+                    <h5><b>{{test.tested.date}}</b></h5>
+                    <h5><b>{{test.tested.time}}</b></h5>
+                </td>
+            </tr>
+            <tr *ngIf="running == false">
+                <td>
+                    <div class="form-group" [ngClass]="{ 'has-error': message }">
+                        <input class="form-control" type="text" placeholder="Test Name" [(ngModel)]="newTestName">
+                        <div *ngIf="message" class="help-block">{{message}}</div>
+                    </div>
+                </td>
+                <td align="center">
+                    <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Start URL" [(ngModel)]="newTestStartUrl">
+                    </div>
+                </td>
+                <td align="center">
+                    <button class="btn btn-primary" (click)="createNewTest()">Create Test</button>
+                </td>
+            </tr>
+            <div *ngIf="running == true">
+                <h2><b>Suite is running...</b></h2>
+            </div>
+        </tbody>
+    </table>
+    <br><br><br><br>
+
+    <h2 *ngIf="history !== undefined && history?.length !== 0 && running == false">Suite Run History</h2>
+    <table class="table" *ngIf="history !== undefined && history?.length !== 0 && running == false">
+        <thead style="background-color: #DCDCDC;">
+            <tr>
+                <th class="max-width">COMPLETED</th>
+                <th class="no-wrap text-center">TEST RESULTS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let h of history">
+                <td>
+                    <h4><a class="nav-link" (click)="onClickHistory(h.id)" style="cursor: pointer;">{{h.date}} @ {{h.time}}</a></h4>
+                </td>
+                <td align="center">
+                    <h5 style="color: green"><b>{{h.status.passed}} PASSED</b></h5>
+                    <h5 style="color: red;"><b>{{h.status.failed}} FAILED</b></h5>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<br><br><br><br><br><br><br>
+<div class="footer">
+    <p style="font-size: 110%">Web Recorder - Automated Website Testing and Monitoring - &copy; 2017 Created By <a href="https://www.linkedin.com/in/nirasdimitris/" target="_blank" style="color:#888585;">Dimitriοs Niras</a></p>
+    <p style="font-size: 90%">
+        Icons made by
+        <a href="http://www.flaticon.com/authors/pixel-buddha" title="Pixel Buddha" target="_blank" style="color:#888585;">
+            Pixel Buddha
+        </a> from
+        <a href="http://www.flaticon.com" title="Flaticon" target="_blank" style="color:#888585;">
+            www.flaticon.com
+        </a> is licensed by
+        <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank" style="color:#888585;">
+            CC 3.0 BY
+        </a>
+    </p>
+</div>
