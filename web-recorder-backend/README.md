@@ -1,7 +1,7 @@
 # Web Recorder Backend
-Backend represents all the logic behind the scenes. It is responsible for test running and scheduling. Backend's API can be accessed from http://snf-7503980.vm.okeanos.grnet.gr:4000 or can be installed locally to your PC. You can see documentation's API [here][documentation].
+Backend represents all the logic behind the scenes. It is responsible for test running and scheduling. Backend's API can be accessed from http://snf-766614.vm.okeanos.grnet.gr:4000 or can be installed locally to your PC. You can see documentation's API [here][documentation].
 
-[documentation]: http://snf-750380.vm.okeanos.grnet.gr:8080/documentation
+[documentation]: http://snf-766614.vm.okeanos.grnet.gr:8080/documentation
 
 ## Installation
 ### Manual Installation
@@ -103,7 +103,7 @@ If you also have installed locally or in your server the app's frontend you have
 ```
 ...
 var db = mongo.db(config.connectionString, { native_parser: true });
-var websiteURL = 'http://snf-750380.vm.okeanos.grnet.gr:8080/';
+var websiteURL = 'http://snf-766614.vm.okeanos.grnet.gr:8080/';
 db.bind('users');
 
 var service = {};
