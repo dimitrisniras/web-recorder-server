@@ -1,6 +1,6 @@
 # Web Recorder Frontend
 
-Web Recorder's frontend is responsible for the presentation of tests results, steps editing, suite scheduling and more. You can access Web Recorder's website from [here](http://snf-750380.vm.okeanos.grnet.gr:8080) or you can install it locally. More information about Web Recorder's functionality can be found [here](http://snf-750380.vm.okeanos.grnet.gr:8080/documentation).
+Web Recorder's frontend is responsible for the presentation of tests results, steps editing, suite scheduling and more. You can access Web Recorder's website from [here](http://snf-766614.vm.okeanos.grnet.gr:8080) or you can install it locally. More information about Web Recorder's functionality can be found [here](http://snf-766614.vm.okeanos.grnet.gr:8080/documentation).
 
 ## Installation
 ### Manual installation
