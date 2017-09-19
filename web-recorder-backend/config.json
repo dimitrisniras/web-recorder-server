@@ -1,5 +1,0 @@
-{
-    "connectionString": "mongodb://localhost:27017/web-recorder",
-    "apiUrl": "http://snf-750380.vm.okeanos.grnet.gr:4000/",
-    "secret": "webrecorderisthemostpowerfultooleverbuild"
-}

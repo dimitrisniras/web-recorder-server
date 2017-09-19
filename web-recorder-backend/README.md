@@ -102,7 +102,7 @@ var server = app.listen(port, function () {
 If you also have installed locally or in your server the app's frontend you have to modify it's listening URL on `services/user.service.js` file:
 ```
 ...
-var db = mongo.db(config.connectionString, { native_parser: true });
+var db = mongo.db(process.env.WEB_RECORDER_CONNENCTION_STRING, { native_parser: true });
 var websiteURL = 'http://snf-766614.vm.okeanos.grnet.gr:8080/';
 db.bind('users');
 

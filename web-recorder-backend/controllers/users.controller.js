@@ -1,4 +1,3 @@
-var config = require('config.json');
 var express = require('express');
 var router = express.Router();
 var userService = require('services/user.service');
@@ -68,63 +67,63 @@ function register(req, res) {
 }
 
 function forgotPassword(req, res) {
-	userService.forgotPassword(req.body.email)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.forgotPassword(req.body.email)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function resetPassword(req, res) {
-	userService.resetPassword(req.params.id, req.body.password)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.resetPassword(req.params.id, req.body.password)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function postTests(req, res) {
-	userService.postTests(req.params._id, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.postTests(req.params._id, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function duplicate(req, res) {
-	userService.duplicate(req.params._id, req.params.suite, req.params.test)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.duplicate(req.params._id, req.params.suite, req.params.test)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function createSuite(req, res) {
-	userService.createSuite(req.params._id, req.body.suiteName)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.createSuite(req.params._id, req.body.suiteName)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function createTest(req, res) {
-	userService.createTest(req.params._id, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.createTest(req.params._id, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getCurrentUser(req, res) {
@@ -144,7 +143,7 @@ function getCurrentUser(req, res) {
 function getUserStats(req, res) {
     userService.getUserStats(req.params._id)
         .then(function(stats) {
-        	res.send(stats);
+            res.send(stats);
         })
         .catch(function(err) {
             res.status(400).send(err);
@@ -152,133 +151,133 @@ function getUserStats(req, res) {
 }
 
 function getSuitesById(req, res) {
-	userService.getSuitesById(req.params._id)
-		.then(function(suites) {
-			res.send(suites);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuitesById(req.params._id)
+        .then(function(suites) {
+            res.send(suites);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getSuiteNames(req, res) {
-	userService.getSuiteNames(req.params._id)
-		.then(function(suiteNames) {
-			res.send(suiteNames);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuiteNames(req.params._id)
+        .then(function(suiteNames) {
+            res.send(suiteNames);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getSuite(req, res) {
-	userService.getSuite(req.params._id, req.params.suite)
-		.then(function(suite) {
-			res.send(suite);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuite(req.params._id, req.params.suite)
+        .then(function(suite) {
+            res.send(suite);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getTestsBySuite(req, res) {
-	userService.getTestsBySuite(req.params._id, req.params.suite)
-		.then(function(tests) {
-			res.send(tests);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getTestsBySuite(req.params._id, req.params.suite)
+        .then(function(tests) {
+            res.send(tests);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getSuiteStats(req, res) {
-	userService.getSuiteStats(req.params._id, req.params.suite)
-		.then(function(stats) {
-			res.send(stats);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuiteStats(req.params._id, req.params.suite)
+        .then(function(stats) {
+            res.send(stats);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getTestNamesBySuite(req, res) {
-	userService.getTestNamesBySuite(req.params._id, req.params.suite)
-		.then(function(names) {
-			res.send(names);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getTestNamesBySuite(req.params._id, req.params.suite)
+        .then(function(names) {
+            res.send(names);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getTest(req, res) {
-	userService.getTest(req.params._id, req.params.suite, req.params.test)
-		.then(function(test) {
-			res.send(test);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getTest(req.params._id, req.params.suite, req.params.test)
+        .then(function(test) {
+            res.send(test);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getTestResult(req, res) {
-	userService.getTestResult(req.params._id, req.params.suite, req.params.test)
-		.then(function(result) {
-			res.send(result);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getTestResult(req.params._id, req.params.suite, req.params.test)
+        .then(function(result) {
+            res.send(result);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getTestStats(req, res) {
-	userService.getTestStats(req.params._id, req.params.suite, req.params.test)
-		.then(function(stats) {
-			res.send(stats);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getTestStats(req.params._id, req.params.suite, req.params.test)
+        .then(function(stats) {
+            res.send(stats);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getSuiteHistory(req, res) {
-	userService.getSuiteHistory(req.params._id, req.params.suite)
-		.then(function(history) {
-			res.send(history);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuiteHistory(req.params._id, req.params.suite)
+        .then(function(history) {
+            res.send(history);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getSuiteTestsHistory(req, res) {
-	userService.getSuiteTestsHistory(req.params._id, req.params.suite, req.params.history_id)
-		.then(function(history) {
-			res.send(history);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuiteTestsHistory(req.params._id, req.params.suite, req.params.history_id)
+        .then(function(history) {
+            res.send(history);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getSuiteTestHistory(req, res) {
-	userService.getSuiteTestHistory(req.params._id, req.params.suite, req.params.history_id, req.params.test)
-		.then(function(test) {
-			res.send(test);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getSuiteTestHistory(req.params._id, req.params.suite, req.params.history_id, req.params.test)
+        .then(function(test) {
+            res.send(test);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function getTestHistory(req, res) {
-	userService.getTestHistory(req.params._id, req.params.suite, req.params.test, req.params.history_id)
-		.then(function(test) {
-			res.send(test);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.getTestHistory(req.params._id, req.params.suite, req.params.test, req.params.history_id)
+        .then(function(test) {
+            res.send(test);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateUser(req, res) {
@@ -292,77 +291,77 @@ function updateUser(req, res) {
 }
 
 function updateUserPassword(req, res) {
-	userService.updateUserPassword(req.params._id, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});	
+    userService.updateUserPassword(req.params._id, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateStepsID(req, res) {
-	userService.updateStepsID(req.params._id, req.params.suite, req.params.test, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});	
+    userService.updateStepsID(req.params._id, req.params.suite, req.params.test, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateTest(req, res) {
-	userService.updateTest(req.params._id, req.params.suite, req.params.test, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.updateTest(req.params._id, req.params.suite, req.params.test, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateTestResult(req, res) {
-	userService.updateTestResult(req.params._id, req.params.suite, req.params.test, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.updateTestResult(req.params._id, req.params.suite, req.params.test, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateTestSettings(req, res) {
-	userService.updateTestSettings(req.params._id, req.params.suite, req.params.test, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.updateTestSettings(req.params._id, req.params.suite, req.params.test, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateSuiteSettings(req, res) {
-	userService.updateSuiteSettings(req.params._id, req.params.suite, req.body)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.updateSuiteSettings(req.params._id, req.params.suite, req.body)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function updateSuiteHistory(req, res) {
-	userService.updateSuiteHistory(req.params._id, req.params.suite)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.updateSuiteHistory(req.params._id, req.params.suite)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteTest(req, res) {
-	userService.deleteTest(req.params._id, req.params.suite, req.params.test)
+    userService.deleteTest(req.params._id, req.params.suite, req.params.test)
         .then(function() {
             res.sendStatus(200);
         })
@@ -372,7 +371,7 @@ function deleteTest(req, res) {
 }
 
 function deleteSuite(req, res) {
-	userService.deleteSuite(req.params._id, req.params.suite)
+    userService.deleteSuite(req.params._id, req.params.suite)
         .then(function() {
             res.sendStatus(200);
         })
@@ -382,33 +381,33 @@ function deleteSuite(req, res) {
 }
 
 function deleteSuiteHistory(req, res) {
-	userService.deleteSuiteHistory(req.params._id, req.params.suite, req.params.history_id)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.deleteSuiteHistory(req.params._id, req.params.suite, req.params.history_id)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteSuiteTestHistory(req, res) {
-	userService.deleteSuiteTestHistory(req.params._id, req.params.suite, req.params.history_id, req.params.test)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.deleteSuiteTestHistory(req.params._id, req.params.suite, req.params.history_id, req.params.test)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteTestHistory(req, res) {
-	userService.deleteTestHistory(req.params._id, req.params.suite, req.params.test, req.params.history_id)
-		.then(function() {
-			res.sendStatus(200);
-		})
-		.catch(function(err) {
-			res.status(400).send(err);
-		});
+    userService.deleteTestHistory(req.params._id, req.params.suite, req.params.test, req.params.history_id)
+        .then(function() {
+            res.sendStatus(200);
+        })
+        .catch(function(err) {
+            res.status(400).send(err);
+        });
 }
 
 function deleteUser(req, res) {
@@ -420,4 +419,3 @@ function deleteUser(req, res) {
             res.status(400).send(err);
         });
 }
-
