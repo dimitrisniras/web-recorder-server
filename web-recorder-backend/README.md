@@ -85,7 +85,7 @@ After selenium and MongoDB installation you have to run `$ npm install` in backe
 #### Declare Environment Variables
 Before you run Web Recorde's API you have to declare the Enviroment Variables that are necessary for the API safety. Specifically these are the Environment Variables that you need to declare:
 
-|  ENV VAR  | Description |
+|  Environment Variable  | Description |
 |-------------------|---------------------------------------------------------------------|
 |  MAILGUN_API_KEY  |  The API key of your Mailgun's personal account for mailgun.js framework  |
 |  MAILGUN_DOMAIN  |  The domain of your Mailgun's personal account for mailgun.js framework  |
