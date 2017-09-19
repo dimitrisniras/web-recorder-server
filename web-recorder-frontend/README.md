@@ -66,7 +66,7 @@ There is a more simple way to install Web Recorder's frontend locally in your PC
 #### Running
 After the successful installation, all you need to do is:
 ```
-$ sudo docker run -d -p <your-port>:8080 --name <your-container-name> webrecordergr/web-recorder:frontend
+$ docker run -d -p <your-port>:8080 --name <your-container-name> webrecordergr/web-recorder-frontend
 ```
 
 It is recommended to run your frontend's image on port 8080 in order to connect directly with Web Recorder's backend without any modification.
