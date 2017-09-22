@@ -133,6 +133,6 @@ After the successful docker installation and before you install and run the Dock
 #### Running
 Having installed MongoDB, you can now run the Web Recorder's backend Docker image typing this command:
 ```
-$ docker run -d -e MAILGUN_API_KEY=<your-mailgun-api-key> -e MAILGUN_DOMAIN-<your-mailgun-domain> -e WEB_RECORDER_CONNECTION_STRING=<your-web-recorder-connection-string> -e JWT_SECRET_KEY=<your-jwt-secret-key> -p <your-port>:4000 -v <your-folder-path>/://usr/src/web-recorder-backend/ --name <your-container-name> webrecordergr/web-recorder-backend
+$ docker run -d -e MAILGUN_API_KEY=<your-mailgun-api-key> -e MAILGUN_DOMAIN=<your-mailgun-domain> -e WEB_RECORDER_CONNECTION_STRING=<your-web-recorder-connection-string> -e JWT_SECRET_KEY=<your-jwt-secret-key> -p <your-port>:4000 --name <your-container-name> webrecordergr/web-recorder-backend
 ```
 It is recommended to run your backend's image on port 4000 in order to connect directly with Web Recorder's frontend without any modification.
