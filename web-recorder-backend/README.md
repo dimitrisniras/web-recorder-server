@@ -128,13 +128,18 @@ var service = {};
 ### Docker Installation
 There is a more simple way to install Web Recorder's backend locally in your PC through a Docker container. At first you need to install docker. Please follow the [very good instructions](https://docs.docker.com/engine/installation/) from the Docker project. 
 
-After the successful docker installation and before you install and run the Docker image you have to install MongoDB in your PC, following the previous steps, described in manual installation.
+#### MongoDB
+After the successful docker installation and before you install and run the Docker image you have to install MongoDB in your PC, through a docker image. The command is:
+```
+docker run -d --name <your-mongo-conainer-name> -p 27017:27017 mongo
+```
+More information about mongo image can be found [here](https://hub.docker.com/r/library/mongo). 
 
 #### Running
 Having installed MongoDB, you can now run the Web Recorder's backend Docker image typing this command:
 ```
-$ docker run -d -e MAILGUN_API_KEY=<your-mailgun-api-key> -e MAILGUN_DOMAIN=<your-mailgun-domain> -e WEB_RECORDER_CONNECTION_STRING=<your-web-recorder-connection-string> -e JWT_SECRET_KEY=<your-jwt-secret-key> -p <your-port>:4000 --name <your-container-name> webrecordergr/web-recorder-backend
+$ docker run -d -e MAILGUN_API_KEY=<your-mailgun-api-key> -e MAILGUN_DOMAIN=<your-mailgun-domain> -e WEB_RECORDER_CONNECTION_STRING=<your-web-recorder-connection-string> -e JWT_SECRET_KEY=<your-jwt-secret-key> -p <your-port>:4000 --name <your-container-name> --link <your-mongo-container-name>:mongodb webrecordergr/web-recorder-backend
 ```
-The WEB_RECORDER_CONNECTION_STRING links the database with the backend. For example `... -e WEB_RECORDER_CONNECTION_STRING=mongodb://localhost:27017/web-recorder ...`
+The WEB_RECORDER_CONNECTION_STRING links the database with the backend. For example `... -e WEB_RECORDER_CONNECTION_STRING=mongodb://<your-mongo-container-name>:27017/web-recorder ...`
 
 It is recommended to run your backend's image on port 4000 in order to connect directly with Web Recorder's frontend without any modification.
