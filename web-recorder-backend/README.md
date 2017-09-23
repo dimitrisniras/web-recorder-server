@@ -140,6 +140,6 @@ Having installed MongoDB, you can now run the Web Recorder's backend Docker imag
 ```
 $ docker run -d -e MAILGUN_API_KEY=<your-mailgun-api-key> -e MAILGUN_DOMAIN=<your-mailgun-domain> -e WEB_RECORDER_CONNECTION_STRING=<your-web-recorder-connection-string> -e JWT_SECRET_KEY=<your-jwt-secret-key> -p <your-port>:4000 --name <your-container-name> --link <your-mongo-container-name>:mongodb webrecordergr/web-recorder-backend
 ```
-The WEB_RECORDER_CONNECTION_STRING links the database with the backend. For example `... -e WEB_RECORDER_CONNECTION_STRING=mongodb://<your-mongo-container-name>:27017/web-recorder ...`
+The WEB_RECORDER_CONNECTION_STRING links the database with the backend. For example `... -e WEB_RECORDER_CONNECTION_STRING=mongodb://<your-mongo-container-name>/web-recorder ...`
 
 It is recommended to run your backend's image on port 4000 in order to connect directly with Web Recorder's frontend without any modification.
