@@ -131,7 +131,7 @@ There is a more simple way to install Web Recorder's backend locally in your PC 
 #### MongoDB
 After the successful docker installation and before you install and run the Docker image you have to install MongoDB in your PC, through a docker image. The command is:
 ```
-docker run -d --name <your-mongo-conainer-name> -p 27017:27017 mongo
+$ docker run -d --name <your-mongo-conainer-name> -p 27017:27017 mongo
 ```
 More information about mongo image can be found [here](https://hub.docker.com/r/library/mongo). 
 
