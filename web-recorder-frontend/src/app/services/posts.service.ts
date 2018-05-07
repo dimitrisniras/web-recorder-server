@@ -4,7 +4,7 @@ import { User } from '../user';
 
 @Injectable()
 export class PostsService {
-  serverURL = 'http://snf-766614.vm.okeanos.grnet.gr:4000/';
+  serverURL = 'http://snf-750380.vm.okeanos.grnet.gr:4000/';
 
   constructor(private http: Http) { }
 

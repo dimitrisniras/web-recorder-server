@@ -62,10 +62,11 @@
                 <p style="font-size: 112%">In order to start recording your own test cases, firstly you should <a routerLink="/sign-up">sign up</a> for a free Web Recorder account. For test creation you can either install our <a (click)="changePage('Chrome Extension')" style="cursor: pointer;">Chrome extension</a>                    or you can use our hosted <a (click)="changePage('Test Editor')" style="cursor: pointer;">test editor</a>. Tests are run from our cloud service. You can set tests to run continuously on a daily <a (click)="changePage('Scheduling Suite Runs')"
                         style="cursor: pointer;">schedule</a> and control various other aspects of your testing.</p><br>
                 <p style="font-size: 112%">You can learn more about Web Recorder and its capabilities in the next sections</p>
+                <iframe width="850" height="420" src="https://www.youtube.com/embed/y5tdpmGfppI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
             <div *ngIf="pageId === 'Chrome Extension'">
                 <h2><b>Chrome Extension</b></h2>
-                <p style="font-size: 112%">Web Recorder includes a free Chrome extension for recording actions in your browser and turning them into a reproducible test case. This extension is available in the <a href="https://github.com/AuthEceSoftEng/web-recorder-chrome-plugin"
+                <p style="font-size: 112%">Web Recorder includes a free Chrome extension for recording actions in your browser and turning them into a reproducible test case. This extension is available in the <a href="https://github.com/dimitrisniras/web-recorder-chrome-extension"
                         target="_blank">GitHub</a>. After installing the extension, a Web Recorder icon will appear in your toolbar. Clicking this icon will show you the Web Recorder recording tool. The first time that you will access the extension, you will
                     need to log in to your Web Recorder account. Then a recording button will present to you.</p><br>
                 <p align="center"><img src="./assets/extension.png"></p><br>
@@ -281,7 +282,7 @@
             </div>
             <div *ngIf="pageId === 'Overview'">
                 <h2><b>API Documentation</b></h2>
-                <p style="font-size: 112%">Web Recorder is a free and open source project. You can find the code of the server <a href="https://github.com/AuthEceSoftEng/web-recorder-server" target="_blank">here</a> and the code of the Chrome extension <a href="https://github.com/AuthEceSoftEng/web-recorder-chrome-plugin"
+                <p style="font-size: 112%">Web Recorder is a free and open source project. You can find the code of the server <a href="https://github.com/dimitrisniras/web-recorder-server" target="_blank">here</a> and the code of the Chrome extension <a href="https://github.com/dimitrisniras/web-recorder-chrome-extension"
                         target="_blank">here</a>. Our API allows you to access and run tests remotely. It can be used to integrate Web Recorder into your workflow.</p><br>
                 <p style="font-size: 112%">In order to access the API you have to be authorized. For that reason on API calls (except <code style="color: grey;">Authenticate</code>, <code style="color: grey;">Register</code>, <code style="color: grey;">Forgot Password</code> and
                     <code style="color: grey;">Reset Password</code> calls) you have to use authorization headers with this format type: <code>Authorization: Bearer + &lt;user.token&gt;</code> (ex. Authorization: Bearer xxxxxxx). The user's token can

@@ -5,7 +5,7 @@
   "author": "Dimitris Niras <nirasdimitris@outlook.com>",
   "main": "server.js",
   "scripts": {
-  	"start": "node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.1.0",

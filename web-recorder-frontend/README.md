@@ -1,6 +1,6 @@
 # Web Recorder Frontend
 
-Web Recorder's frontend is responsible for the presentation of tests results, steps editing, suite scheduling and more. You can access Web Recorder's website from [here](http://snf-766614.vm.okeanos.grnet.gr:8080) or you can install it locally. More information about Web Recorder's functionality can be found [here](http://snf-766614.vm.okeanos.grnet.gr:8080/documentation).
+Web Recorder's frontend is responsible for the presentation of tests results, steps editing, suite scheduling and more. You can access Web Recorder's website from [here](http://snf-750380.vm.okeanos.grnet.gr) or you can install it locally. More information about Web Recorder's functionality can be found [here](http://snf-750380.vm.okeanos.grnet.gr/documentation).
 
 ## Installation
 ### Manual installation
@@ -21,12 +21,12 @@ $ ng build --prod --aot
 
 #### Running
 Having installed all the required packages and built the application, it's time to run it. There are two options to run:
-1) Using `$ ng serve`. The application will listen by default to port 4200. You can change listening port with `--port <port>` flag. It is recommended to use 8080 port so you don't have to change listening URL to backend files.
+1) Using `$ ng serve`. The application will listen by default to port 4200. You can change listening port with `--port <port>` flag. It is recommended to use 80 port so you don't have to change listening URL to backend files.
 2) Using `$ node server.js`. The application will listen to 8080 port. In order ro change it you have to modify `server.js` file:
 ```
 ...
-app.listen(8080, function() {
-    console.log('Frontend app listening on port 8080!');
+app.listen(80, function() {
+    console.log('Frontend app listening on port 80!');
 });
 ```
 
@@ -45,7 +45,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
-  serverURL = 'http://localhost:4000/';
+  serverURL = 'http://snf-750380.vm.okeanos.grnet.gr:4000/';
 ...
 ```
 and on `src/app/services/posts.service.ts` file:
@@ -56,7 +56,7 @@ import { User } from '../user';
 
 @Injectable()
 export class PostsService {
-  serverURL = 'http://localhost:4000/';
+  serverURL = 'http://snf-750380.vm.okeanos.grnet.gr:4000/';
 ...
 ```
 
